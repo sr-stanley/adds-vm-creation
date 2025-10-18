@@ -32,10 +32,8 @@ Open and log in to Azure: [https://azure.microsoft.com/](https://azure.microsoft
 - [Step 5 - Set the Domain Controller’s Private IP Address to Static in Azure](#step-5---set-the-domain-controllers-private-ip-address-to-static-in-azure)
 - [Step 6 - Login to DC-1 Virtual Machine via Remote Desktop Connection](#step-6---login-to-dc-1-virtual-machine-via-remote-desktop-connection)
 - [Step 7 - Disable Windows Firewall Inside the Domain Controller VM](#step-7---disable-windows-firewall-inside-the-domain-controller-vm)
-- [Step 8 - Configure the Client VMs DNS settings to DC-1 VMs private IP address](#step-8---configure-the-client-vms-dns-settings-to-dc-1-vm-private-ip-address)
+- [Step 8 - Configure the Client VMs DNS settings to DC-1 VMs private IP address](#step-8---configure-the-client-vms-dns-settings-to-dc-1-vms-private-ip-address)
 - [Step 9 - Confirm Client VM can Communicate to DC-1 VM](#step-9---confirm-client-vm-can-communicate-to-dc-1-vm)
-
-
 
 ---
 
@@ -182,7 +180,7 @@ Normally you would not permanently disable the firewall on a domain controller o
 
 ---
 
-### Step 8 - Configure the Client VMs DNS settings to DC-1 VMs private IP address
+### Step 8 - Configure the Client VMs DNS Settings to DC-1 VMs Private IP Address
 
 **First, minimize the Remote Desktop Connection and go back into Azure → Select your DC-1 VM and locate the Private IP Address and copy it.**
 
