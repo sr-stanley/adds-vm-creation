@@ -106,7 +106,6 @@ Box 2: `I confirm I have an eligible Windows Server license with Software Assura
 The **Client** virtual machine is a VM that is joined to the domain managed by the domain controller. It acts as a domain member computer, allowing users to log-in using their domain credentials and access shared resources, policies, and security settings controlled by Active Directory.
 
 - At the top of the screen, in the search bar, type in **"virtual machine"** and select virtual machines under **services**.
-
 - Click `Create` and select `Virtual Machine` and configure the following details.
 
 **Basics**
@@ -153,7 +152,7 @@ The **Client** virtual machine is a VM that is joined to the domain managed by t
 ---
 
 ### Step 6 - Login to DC-1 Virtual Machine via Remote Desktop Connection
-If you are on a Mac you will need to download "Microsoft Remote Desktop" from the app store.
+If you are on a Mac you will need to download **Microsoft Remote Desktop** from the app store.
 
 **First, inside of Azure get the Public IP address for your DC-1 VM.**
 
@@ -213,6 +212,7 @@ Normally you would not permanently disable the firewall on a domain controller o
 Login to the Client VM and confirm that the client can communicate with the domain controller by pinging DC-1’s private IP address via PowerShell or Command Prompt. Receiving replies from the ping means the network connection between the two VMs is working correctly. This is a basic but important connectivity test before continuing with domain setup.
 
 **To login to the Client VM follow the same steps as you did in Step 6.**
+
 First, inside of Azure get the Public IP address for your Client VM.
 Next, open `Remote Desktop Connection` and click the drop down arrow for `Show Options` and enter:
 - Computer → Public IP for your Client VM.
