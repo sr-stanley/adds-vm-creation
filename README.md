@@ -3,13 +3,15 @@
 </p>
 
 <h1>Creating and configuring a Domain Controller VM and Client VM within Azure VMs</h1>
-This tutorial outlines the creation of a Domain Controller Virtual Machine and Client Virtual Machine within Azure. After creation, we will configure DNS settings so that both VMs can communicate via network connection.<br />
+
+This tutorial outlines the creation of a **Domain Controller Virtual Machine** and **Client Virtual Machine** within **Azure**. After creation, we will configure DNS settings so that both VM's can communicate via a network connection.<br />
 
 <h2>Environments and Technologies Used</h2>
 
 - Microsoft Azure (Virtual Machines/Compute)
 - Remote Desktop
 - PowerShell
+- DNS Configuration
 
 <h2>Operating Systems Used </h2>
 
@@ -38,7 +40,7 @@ Open and log-in to Azure: [https://azure.microsoft.com/](https://azure.microsoft
 ---
 
 ### Step 1 - Create a Resource Group
-In Microsoft Azure, a resource group is a logical container that holds related resources for an Azure solution. You can think of it like a folder that helps you organize and manage all the services that belong to a specific project, application, or environment.
+In Microsoft Azure, a **resource group** is a logical container that holds related resources for an Azure solution. You can think of it like a folder that helps you organize and manage all the services that belong to a specific project, application, or environment.
 
  - At the top of the screen, in the search bar, type in **"resource group"** and select resource group under **services**.
 
@@ -105,7 +107,7 @@ The **Client** virtual machine is a VM that is joined to the domain managed by t
 
 - At the top of the screen, in the search bar, type in **"virtual machine"** and select virtual machines under **services**.
 
-Click `Create` and select `Virtual Machine` and configure the following details.
+- Click `Create` and select `Virtual Machine` and configure the following details.
 
 **Basics**
 - Resource Group → Select the one you created earlier.
@@ -153,19 +155,19 @@ Click `Create` and select `Virtual Machine` and configure the following details.
 ### Step 6 - Login to DC-1 Virtual Machine via Remote Desktop Connection
 If you are on a Mac you will need to download "Microsoft Remote Desktop" from the app store.
 
-First, inside of Azure get the Public IP address for your DC-1 VM.
+**First, inside of Azure get the Public IP address for your DC-1 VM.**
 
 [pic 1.1]
 
-Next, open `Remote Desktop Connection` and click the drop down arrow for `Show Options` and enter:
+**Next, open `Remote Desktop Connection` and click the drop down arrow for `Show Options` and enter:**
 - Computer → Public IP for your DC-1 VM.
 - Username → The username you created when setting up the DC-1 VM. 
-
-Click `Connect` and you will be prompted to enter the password for the DC-1 VM that you created earlier. Enter the password and click `OK`. Then click `Yes` to connect to your DC-1 VM via Remote Desktop Connection.
+- Click `Connect` and you will be prompted to enter the password for the DC-1 VM that you created earlier.
+- Enter the password and click `OK`. Then click `Yes` to connect to your DC-1 VM via Remote Desktop Connection.
 
 [pic 1.2]
 
-Once logged into the Domain Controller, **Server Manager** will load up automatically.
+- Once logged into the Domain Controller, **Server Manager** will load up automatically.
 
 [pic 1.3]
 
@@ -194,7 +196,7 @@ Normally you would not permanently disable the firewall on a domain controller o
 
 [pic 1.6]
 
-On the left hand menu under `Settings` select DNS servers → Click `Custom` → Paste the DC-1 VM's Private IP Address into the box → Click `Save`.
+- On the left hand menu under `Settings` select DNS servers → Click `Custom` → Paste the DC-1 VM's Private IP Address into the box → Click `Save`.
 
 [pic 1.7]
 
@@ -214,19 +216,19 @@ Login to the Client VM and confirm that the client can communicate with the doma
 First, inside of Azure get the Public IP address for your Client VM.
 Next, open `Remote Desktop Connection` and click the drop down arrow for `Show Options` and enter:
 - Computer → Public IP for your Client VM.
-- Username → The username you created when setting up the Client VM. 
-
-Click `Connect` and you will be prompted to enter the password for the Client VM that you created earlier. Enter the password and click `OK`. Then click `Yes` to connect to your DC-1 VM via Remote Desktop Connection.
+- Username → The username you created when setting up the Client VM.
+- Click `Connect` and you will be prompted to enter the password for the Client VM that you created earlier.
+- Enter the password and click `OK`. Then click `Yes` to connect to your DC-1 VM via Remote Desktop Connection.
 
 *If this is your first time logging into your Client VM you will need to click through the startup configurations*
 
-Once logged onto your Client VM open up Windows PowerShell from the start menu.
-Type the command `ping` followed by the Private IP Address for you DC-1 VM. If configured correctly it should return `Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)`. If it returns `Destination host unreachable.` the two VM's may have been set up in different Virtual Networks or the DC-1's firewall is still active and blocking the ping.
+**Once logged onto your Client VM open up Windows PowerShell from the start menu.**
+- Type the command `ping` followed by the Private IP Address for you DC-1 VM. If configured correctly it should return `Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)`. If it returns `Destination host unreachable.` the two VM's may have been set up in different Virtual Networks or the DC-1's firewall is still active and blocking the ping.
 
 [pic 1.9]
 
-Next, lets confirm the DNS Server shows DC-1's Private IP Address.
-Type the command `ipconfig /all`. The DNS Servers should return the DC-1's VM Private IP Address.
+**Next, lets confirm the DNS Server shows DC-1's Private IP Address.**
+- Type the command `ipconfig /all`. The DNS Servers should return the DC-1's VM Private IP Address.
 
 [pic 2.0]
 
