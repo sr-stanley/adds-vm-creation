@@ -2,40 +2,25 @@
 <img src="https://i.imgur.com/pU5A58S.png" alt="Microsoft Active Directory Logo"/>
 </p>
 
-
 <h1>Creating and configuring a Domain Controller VM and Client VM within Azure VMs</h1>
 This tutorial outlines the creation of a Domain Controller Virtual Machine and Client Virtual Machine within Azure. After creation, we will configure DNS settings so that both VMs can communicate via network connection.<br />
-
 
 <h2>Environments and Technologies Used</h2>
 
 - Microsoft Azure (Virtual Machines/Compute)
 - Remote Desktop
-- Active Directory Domain Services
+- PowerShell
 
 <h2>Operating Systems Used </h2>
 
 - Windows Server 2022
 - Windows 10 (22H2)
 
-<h2>High-Level Deployment and Configuration Steps</h2>
+<h2>Pre-requisite</h2>
 
-- Step 1
-- Step 2
-- Step 3
-- Step 4
+Open and log-in to Azure: [https://azure.microsoft.com/](https://azure.microsoft.com/)
 
-
-
-Open and log in to Azure: azure.microsoft.com
-
-[https://azure.microsoft.com/](https://azure.microsoft.com/)
-
-<a href="https://azure.microsoft.com/" target="_blank" rel="noopener">Azure Login</a>
-
-If you do not already have an account, sign up for a free trial.
-
-
+**If you do not already have an account, sign up for a free trial.**
 
 ## Table of Contents
 - [Step 1 - Create a Resource Group](#step-1-create-a-resource-group)
@@ -50,7 +35,7 @@ If you do not already have an account, sign up for a free trial.
 
 
 
---------------------------------------------------
+---
 
 ### Step 1 - Create a Resource Group
 In Microsoft Azure, a resource group is a logical container that holds related resources for an Azure solution. You can think of it like a folder that helps you organize and manage all the services that belong to a specific project, application, or environment.
@@ -63,7 +48,7 @@ In Microsoft Azure, a resource group is a logical container that holds related r
 
 [pic 0.1]
 
---------------------------------------------------
+---
 
 ### Step 2 - Create a Virtual Network and Subnet
 A **Virtual Network** (VNet) in Microsoft Azure is a software-defined, private network that enables secure communication between Azure resources, on-premises systems, and the internet. It functions like a traditional on-premises network which supports subnets, IP address ranges, routing, and security controls while providing isolation, segmentation, and advanced connectivity options such as VPN gateways and ExpressRoute.
@@ -80,7 +65,7 @@ A **subnet** in Microsoft Azure is a logical subdivision of a Virtual Network (V
 
 [pic 0.3]
 
---------------------------------------------------
+---
 
 ### Step 3 - Create the Domain Controller Virtual Machine
 Technically, we are creating a Windows Server that will later be promoted to a domain controller. A **domain controller** is a server within a Windows Active Directory domain that centrally manages identity, authentication, and authorization. It enforces security policies, stores user credentials, and replicates directory data to ensure consistent access and control across the network.
@@ -113,10 +98,10 @@ Box 2: `I confirm I have an eligible Windows Server license with Software Assura
 
 [pic 0.6]
 
---------------------------------------------------
+---
 
 ### Step 4 - Create the Client Virtual Machine
-The **Client** virtual machine is a VM that is joined to the domain managed by the domain controller. It acts as a domain member computer, allowing users to log in using their domain credentials and access shared resources, policies, and security settings controlled by Active Directory.
+The **Client** virtual machine is a VM that is joined to the domain managed by the domain controller. It acts as a domain member computer, allowing users to log-in using their domain credentials and access shared resources, policies, and security settings controlled by Active Directory.
 
 - At the top of the screen, in the search bar, type in **"virtual machine"** and select virtual machines under **services**.
 
@@ -141,7 +126,7 @@ Click `Create` and select `Virtual Machine` and configure the following details.
 
 [pic 0.8]
 
---------------------------------------------------
+---
 
 ### Step 5 - Set the Domain Dontroller’s Private IP Address to Static in Azure
 
@@ -163,7 +148,7 @@ Click `Create` and select `Virtual Machine` and configure the following details.
 
 [pic 1.0]
 
---------------------------------------------------
+---
 
 ### Step 6 - Login to DC-1 Virtual Machine via Remote Desktop Connection
 If you are on a Mac you will need to download "Microsoft Remote Desktop" from the app store.
@@ -184,7 +169,7 @@ Once logged into the Domain Controller, **Server Manager** will load up automati
 
 [pic 1.3]
 
---------------------------------------------------
+---
 
 ### Step 7 - Disable Windows Firewall Inside the Domain Controller VM
 Normally you would not permanently disable the firewall on a domain controller or other servers in a real-life production environment. In this mock scenario, the firewall is disabled temporarily to make communication and troubleshooting easier while setting up Active Directory and DNS. This avoids issues where firewall rules might block required traffic between the domain controller and client machine. In real-world settings, you would configure the firewall to allow only necessary ports and services, not disable it completely.
@@ -194,7 +179,7 @@ Normally you would not permanently disable the firewall on a domain controller o
 
 [pic 1.4]
 
---------------------------------------------------
+---
 
 ### Step 8 - Configure the Client VM's DNS settings to DC-1 VM's private IP address
 
@@ -220,24 +205,23 @@ On the left hand menu under `Settings` select DNS servers → Click `Custom` →
 
 [pic 1.8]
 
---------------------------------------------------
+---
 
 ### Step 9 - Confirm Client VM can Communicate to DC-1 VM
 Login to the Client VM and confirm that the client can communicate with the domain controller by pinging DC-1’s private IP address via PowerShell or Command Prompt. Receiving replies from the ping means the network connection between the two VMs is working correctly. This is a basic but important connectivity test before continuing with domain setup.
 
-To login to the Client VM follow the same steps as you did in Step 6.
+**To login to the Client VM follow the same steps as you did in Step 6.**
 First, inside of Azure get the Public IP address for your Client VM.
-
 Next, open `Remote Desktop Connection` and click the drop down arrow for `Show Options` and enter:
 - Computer → Public IP for your Client VM.
 - Username → The username you created when setting up the Client VM. 
 
 Click `Connect` and you will be prompted to enter the password for the Client VM that you created earlier. Enter the password and click `OK`. Then click `Yes` to connect to your DC-1 VM via Remote Desktop Connection.
 
-If this is your first time logging into your Client VM you will need to click through the startup configurations
+*If this is your first time logging into your Client VM you will need to click through the startup configurations*
 
 Once logged onto your Client VM open up Windows PowerShell from the start menu.
-Type the command `ping` followed by the Private IP Address for you DC-1 VM. If configured correctly it should return "Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)". If it returns "Destination host unreachable." the two VM's may have been set up in different Virtual Networks or the DC-1's firewall is still active and blocking the ping.
+Type the command `ping` followed by the Private IP Address for you DC-1 VM. If configured correctly it should return `Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)`. If it returns `Destination host unreachable.` the two VM's may have been set up in different Virtual Networks or the DC-1's firewall is still active and blocking the ping.
 
 [pic 1.9]
 
