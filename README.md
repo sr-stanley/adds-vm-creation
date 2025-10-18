@@ -40,7 +40,7 @@ In Microsoft Azure, a resource group is a logical container that holds related r
 
 [pic 0.0]
 
-- Click create → select your subscription → name your resource group → select your region → click Review + Create → click create again.
+- Click `Create` → select your subscription → Name your resource group → Select your region → Click `Review + Create` → Click `Create` again.
 
 [pic 0.1]
 
