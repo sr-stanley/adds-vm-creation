@@ -29,9 +29,9 @@ This tutorial outlines the creation of a Domain Controller Virtual Machine and C
 
 Open and log in to Azure: azure.microsoft.com
 
-[azure.microsoft.com](azure.microsoft.com)
+[https://azure.microsoft.com/](https://azure.microsoft.com/)
 
-<a href="azure.microsoft.com" target="_blank" rel="noopener">Azure Login</a>
+<a href="https://azure.microsoft.com/" target="_blank" rel="noopener">Azure Login</a>
 
 If you do not already have an account, sign up for a free trial.
 
@@ -44,6 +44,9 @@ If you do not already have an account, sign up for a free trial.
 - [Step 4 - Create the Client Virtual Machine](#step-4-create-the-client-virtual-machine)
 - [Step 5 - Set the Domain Dontroller’s Private IP Address to Static in Azure](#step-5-set-the-domain-controllers-private-ip-address-to-static-in-azure)
 - [Step 6 - Login to DC-1 Virtual Machine via Remote Desktop Connection](#step-6-login-to-dc-1-virtual-machine-via-remote-desktop-connection)
+- [Step 7 - Disable Windows Firewall Inside the Domain Controller VM](#step-7-disable-windows-firewall-inside-the-domain-controller-vm)
+- [Step 8 - Configure the Client VM's DNS settings to DC-1 VM's private IP address](#step-8-configure-the-client-vms-dns-settings-to-dc-1-vm-private-ip-address)
+- [Step 9 - Confirm Client VM can Communicate to DC-1 VM](#step-9-confirm-client-vm-can-communicate-to-dc-1-vm)
 
 
 
@@ -62,7 +65,7 @@ In Microsoft Azure, a resource group is a logical container that holds related r
 
 --------------------------------------------------
 
-## Step 2 - Create a Virtual Network and Subnet
+### Step 2 - Create a Virtual Network and Subnet
 A **Virtual Network** (VNet) in Microsoft Azure is a software-defined, private network that enables secure communication between Azure resources, on-premises systems, and the internet. It functions like a traditional on-premises network which supports subnets, IP address ranges, routing, and security controls while providing isolation, segmentation, and advanced connectivity options such as VPN gateways and ExpressRoute.
 
 A **subnet** in Microsoft Azure is a logical subdivision of a Virtual Network (VNet) that organizes and isolates resources within the cloud. It divides a larger network into smaller, manageable sections, each with its own IP address range, security policies, and routing rules to control and secure network traffic.
@@ -79,7 +82,7 @@ A **subnet** in Microsoft Azure is a logical subdivision of a Virtual Network (V
 
 --------------------------------------------------
 
-## Step 3 - Create the Domain Controller Virtual Machine
+### Step 3 - Create the Domain Controller Virtual Machine
 Technically, we are creating a Windows Server that will later be promoted to a domain controller. A **domain controller** is a server within a Windows Active Directory domain that centrally manages identity, authentication, and authorization. It enforces security policies, stores user credentials, and replicates directory data to ensure consistent access and control across the network.
 
 
@@ -112,7 +115,7 @@ Box 2: `I confirm I have an eligible Windows Server license with Software Assura
 
 --------------------------------------------------
 
-## Step 4 - Create the Client Virtual Machine
+### Step 4 - Create the Client Virtual Machine
 The **Client** virtual machine is a VM that is joined to the domain managed by the domain controller. It acts as a domain member computer, allowing users to log in using their domain credentials and access shared resources, policies, and security settings controlled by Active Directory.
 
 - At the top of the screen, in the search bar, type in **"virtual machine"** and select virtual machines under **services**.
@@ -140,7 +143,7 @@ Click `Create` and select `Virtual Machine` and configure the following details.
 
 --------------------------------------------------
 
-## Step 5 - Set the Domain Dontroller’s Private IP Address to Static in Azure
+### Step 5 - Set the Domain Dontroller’s Private IP Address to Static in Azure
 
 **This is important because:**
 - The domain controller acts as a server and DNS server.
@@ -162,8 +165,8 @@ Click `Create` and select `Virtual Machine` and configure the following details.
 
 --------------------------------------------------
 
-## Step 6 - Login to DC-1 Virtual Machine via Remote Desktop Connection
-(If you are on a Mac you will need to download "Microsoft Remote Desktop" from the app store.)
+### Step 6 - Login to DC-1 Virtual Machine via Remote Desktop Connection
+If you are on a Mac you will need to download "Microsoft Remote Desktop" from the app store.
 
 First, inside of Azure get the Public IP address for your DC-1 VM.
 
@@ -183,117 +186,66 @@ Once logged into the Domain Controller, **Server Manager** will load up automati
 
 --------------------------------------------------
 
-Step 7 - Disable Windows Firewall Inside the Domain Controller VM
+### Step 7 - Disable Windows Firewall Inside the Domain Controller VM
+Normally you would not permanently disable the firewall on a domain controller or other servers in a real-life production environment. In this mock scenario, the firewall is disabled temporarily to make communication and troubleshooting easier while setting up Active Directory and DNS. This avoids issues where firewall rules might block required traffic between the domain controller and client machine. In real-world settings, you would configure the firewall to allow only necessary ports and services, not disable it completely.
 
-Normally you would not permanently disable the firewall on a domain controller or other servers in a real-life production environment.
-
-In this mock scenario, the firewall is disabled temporarily to make communication and troubleshooting easier while setting up Active Directory and DNS. This avoids issues where firewall rules might block required traffic between the domain controller and client machine.
-
-In real-world settings, you would configure the firewall to allow only necessary ports and services, not disable it completely.
-
-- Right click the start menu and select "Run" → Enter "wf.msc" to open Windows Firewall.
-- Select Properties on the right hand menu → Turn off the Firewall State under Domain Profile, Private Profile and Public Profile → Click Apply then OK.
+- Right click the start menu and select `Run` → Enter `wf.msc` to open Windows Firewall.
+- Select `Properties` on the right hand menu → Turn off the Firewall State under **Domain Profile**, **Private Profile** and **Public Profile** → Click `Apply` then `OK`.
 
 [pic 1.4]
 
 --------------------------------------------------
 
-Step 8 - Configure the Client VM's DNS settings to DC-1 VM's private IP address.
+### Step 8 - Configure the Client VM's DNS settings to DC-1 VM's private IP address
 
-First, minimize the Remote Desktop Connection and go back into Azure → Select your DC-1 VM and locate the Private IP Address and copy it.
+**First, minimize the Remote Desktop Connection and go back into Azure → Select your DC-1 VM and locate the Private IP Address and copy it.**
 
 [pic 1.5]
 
-Next, open your Client Virtual Machine.
+**Next, open your Client Virtual Machine.**
 - Click the drop down for Networking.
 - Select Network settings.
 - Click the Network interface / IP configuration.
 
 [pic 1.6]
 
-On the left hand menu under "Settings" select DNS servers → Click "Custom" → Paste the DC-1 VM's Private IP Address into the box → Click "Save".
+On the left hand menu under `Settings` select DNS servers → Click `Custom` → Paste the DC-1 VM's Private IP Address into the box → Click `Save`.
 
 [pic 1.7]
 
-To confirm the settings are active lest reset the Client VM.
+**To confirm the settings are activated lets reset the Client VM.**
 - Select the Client VM.
 - Check the box.
-- Click Restart.
+- Click `Restart`.
 
 [pic 1.8]
 
 --------------------------------------------------
 
-Step 9 - Confirm Client VM can Communicate to DC-1 VM
-
+### Step 9 - Confirm Client VM can Communicate to DC-1 VM
 Login to the Client VM and confirm that the client can communicate with the domain controller by pinging DC-1’s private IP address via PowerShell or Command Prompt. Receiving replies from the ping means the network connection between the two VMs is working correctly. This is a basic but important connectivity test before continuing with domain setup.
 
 To login to the Client VM follow the same steps as you did in Step 6.
 First, inside of Azure get the Public IP address for your Client VM.
 
-Next, open "Remote Desktop Connection" and click the drop down arrow for "Show Options" and enter:
+Next, open `Remote Desktop Connection` and click the drop down arrow for `Show Options` and enter:
 - Computer → Public IP for your Client VM.
 - Username → The username you created when setting up the Client VM. 
 
-Click "Connect" and you will be prompted to enter the password for the Client VM that you created earlier. Enter the password and click "OK". Then click "Yes" to connect to your DC-1 VM via Remote Desktop Connection.
+Click `Connect` and you will be prompted to enter the password for the Client VM that you created earlier. Enter the password and click `OK`. Then click `Yes` to connect to your DC-1 VM via Remote Desktop Connection.
 
 If this is your first time logging into your Client VM you will need to click through the startup configurations
 
 Once logged onto your Client VM open up Windows PowerShell from the start menu.
-Type the command "ping" followed by the Private IP Address for you DC-1 VM. If configured correctly it should return "Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)". If it returns "Destination host unreachable." the two VM's may have been set up in different Virtual Networks or the DC-1's firewall is still active and blocking the ping.
+Type the command `ping` followed by the Private IP Address for you DC-1 VM. If configured correctly it should return "Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)". If it returns "Destination host unreachable." the two VM's may have been set up in different Virtual Networks or the DC-1's firewall is still active and blocking the ping.
 
 [pic 1.9]
 
 Next, lets confirm the DNS Server shows DC-1's Private IP Address.
-Type the command "ipconfig /all". The DNS Servers should return the DC-1's VM Private IP Address.
+Type the command `ipconfig /all`. The DNS Servers should return the DC-1's VM Private IP Address.
 
 [pic 2.0]
 
+---
 
-
-This concludes Part 1; configurations and creation of the Domain Controller Virtual Machine and the Client Virtual Machine. In the next part we will install and configure Active Directory in our Domain Controller, add the Client VM to the domain and create and configure Users inside of Active Directory for our mock scenario environment.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h2>Deployment and Configuration Steps</h2>
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
-
-<p>
-<img src="https://i.imgur.com/DJmEXEB.png" height="80%" width="80%" alt="Disk Sanitization Steps"/>
-</p>
-<p>
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-</p>
-<br />
+## This concludes Part 1 - configurations and creation of the Domain Controller Virtual Machine and the Client Virtual Machine. In the next part we will install and configure Active Directory in our Domain Controller, add the Client VM to the domain and create and configure users inside of Active Directory for our mock scenario environment.
