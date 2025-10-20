@@ -4,7 +4,7 @@
 
 <h1>Creating and configuring a Domain Controller VM and Client VM within Azure VMs</h1>
 
-This tutorial outlines the creation of a **Domain Controller Virtual Machine** and **Client Virtual Machine** within **Azure**. After creation, we will configure DNS settings so that both VMs can communicate via a network connection.<br />
+This tutorial outlines the creation of a **Domain Controller Virtual Machine** and **Client Virtual Machine** within **Azure**. After creation, we will configure DNS settings so that both VMs can communicate over the network.<br />
 
 <h2>Environments and Technologies Used</h2>
 
@@ -40,7 +40,7 @@ Open and log in to Azure: [https://azure.microsoft.com/](https://azure.microsoft
 ### Step 1 - Create a Resource Group
 In Microsoft Azure, a **resource group** is a logical container that holds related resources for an Azure solution. You can think of it like a folder that helps you organize and manage all the services that belong to a specific project, application, or environment.
 
- - At the top of the screen, in the search bar, type in **"resource group"** and select resource group under **services**.
+ - At the top of the screen, in the search bar, type in `resource group` and select resource group under `services`.
 
 [pic 0.0]
 
@@ -55,7 +55,7 @@ A **Virtual Network** (VNet) in Microsoft Azure is a software-defined, private n
 
 A **subnet** in Microsoft Azure is a logical subdivision of a Virtual Network (VNet) that organizes and isolates resources within the cloud. It divides a larger network into smaller, manageable sections, each with its own IP address range, security policies, and routing rules to control and secure network traffic.
 
-- At the top of the screen, in the search bar, type in **"virtual network"** and select virtual networks under **services**.
+- At the top of the screen, in the search bar, type in `virtual network` and select virtual networks under `services`.
 
 [pic 0.2]
 
@@ -71,7 +71,7 @@ A **subnet** in Microsoft Azure is a logical subdivision of a Virtual Network (V
 Technically, we are creating a Windows Server that will later be promoted to a domain controller. A **domain controller** is a server within a Windows Active Directory domain that centrally manages identity, authentication, and authorization. It enforces security policies, stores user credentials, and replicates directory data to ensure consistent access and control across the network.
 
 
-- At the top of the screen, in the search bar, type in **"virtual machine"** and select virtual machines under **services**.
+- At the top of the screen, in the search bar, type in `virtual machine` and select virtual machines under `services`.
 
 [pic 0.4]
 
@@ -85,8 +85,8 @@ Technically, we are creating a Windows Server that will later be promoted to a d
 - Size → Standard_D2s_v3 - 2 vcpus, 8 GiB memory.
 - Create a Username and Password.
 - Licensing → Check the two licensing boxes. A second box will pop up once you check the first box.
-Box 1: `Would you like to use an existing Windows Server license?`
-Box 2: `I confirm I have an eligible Windows Server license with Software Assurance or Windows Server subscription to apply this Azure Hybrid Benefit.`
+ - Box 1: `Would you like to use an existing Windows Server license?`
+ - Box 2: `I confirm I have an eligible Windows Server license with Software Assurance or Windows Server subscription to apply this Azure Hybrid Benefit.`
 
 [pic 0.5]
 
@@ -103,7 +103,7 @@ Box 2: `I confirm I have an eligible Windows Server license with Software Assura
 ### Step 4 - Create the Client Virtual Machine
 The **Client** virtual machine is a VM that is joined to the domain managed by the domain controller. It acts as a domain member computer, allowing users to log in using their domain credentials and access shared resources, policies, and security settings controlled by Active Directory.
 
-- At the top of the screen, in the search bar, type in **"virtual machine"** and select virtual machines under **services**.
+- At the top of the screen, in the search bar, type in `virtual machine` and select virtual machines under `services`.
 - Click `Create` and select `Virtual Machine` and configure the following details.
 
 **Basics**
@@ -129,17 +129,16 @@ The **Client** virtual machine is a VM that is joined to the domain managed by t
 
 ### Step 5 - Set the Domain Controller’s Private IP Address to Static in Azure
 
-**This is important because:**
-- The domain controller acts as a server and DNS server.
-- If its IP changes (as it can with a dynamic IP), clients that rely on its IP for DNS will lose connection.
-- Setting the IP to static ensures the clients can always find and communicate with the domain controller reliably.
-- This stability is essential for proper server and domain operations.
+**Important for DNS Dependency**
+> Before joining any client VMs to the domain, ensure the Domain Controller’s private IP address is set to **Static**.  
+> If the Domain Controllers IP changes, client DNS resolution will fail and domain authentication will break.  
+> Setting the DC-1 private IP to static ensures reliable communication and name resolution across the lab.
 
 **Open the Virtual Machines services inside of Azure. Click and open your DC-1 Virtual Machine.**
 
-- Click the drop down for Networking.
-- Select Network settings.
-- Click the Network interface / IP configuration.
+- Click the drop down for `Networking`.
+- Select `Network setting`s.
+- Click the `Network interface / IP configuration`.
 
 [pic 0.9]
 
@@ -181,15 +180,16 @@ Normally you would not permanently disable the firewall on a domain controller o
 ---
 
 ### Step 8 - Configure the Client VMs DNS Settings to DC-1 VMs Private IP Address
+**Reminder:** Because DC-1’s private IP is static, we can safely point the client VM’s DNS to that address for domain communication.
 
 **First, minimize the Remote Desktop Connection and go back into Azure → Select your DC-1 VM and locate the Private IP Address and copy it.**
 
 [pic 1.5]
 
 **Next, open your Client Virtual Machine.**
-- Click the drop down for Networking.
-- Select Network settings.
-- Click the Network interface / IP configuration.
+- Click the drop down for `Networking`.
+- Select `Network settings`.
+- Click the `Network interface / IP configuration`.
 
 [pic 1.6]
 
