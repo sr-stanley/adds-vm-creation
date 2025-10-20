@@ -42,11 +42,12 @@ In Microsoft Azure, a **resource group** is a logical container that holds relat
 
  - At the top of the screen, in the search bar, type in `resource group` and select resource group under `services`.
 
-[pic 0.0]
+<img width="597" height="648" alt="0 0 resource group" src="https://github.com/user-attachments/assets/3e778765-9958-40d8-9f20-81b07bc6bb37" />
+<br><br>
 
 - Click `Create` → Select your subscription → Name your resource group → Select your region → Click `Review + Create` → Click `Create` again.
-
-[pic 0.1]
+<br>
+<img width="777" height="905" alt="0 1 name and create" src="https://github.com/user-attachments/assets/5f42b4ab-ca1f-4e65-b982-8f5218dba49d" />
 
 ---
 
@@ -57,13 +58,14 @@ A **subnet** in Microsoft Azure is a logical subdivision of a Virtual Network (V
 
 - At the top of the screen, in the search bar, type in `virtual network` and select virtual networks under `services`.
 
-[pic 0.2]
+<img width="513" height="370" alt="0 2 virtual network" src="https://github.com/user-attachments/assets/7d89038d-0d35-474e-aa14-e2391d8d9a80" />
+<br><br>
 
 - Click `Create` → Select your subscription and the resource group you just created → Name your virtual network → Select your region (recommend using the same one as you did for the resource group creation) → Click `Review + Create` → Click `Create` again.
 
 **Wait for deployment to finish**
 
-[pic 0.3]
+<img width="1590" height="508" alt="0 3 virtual network deploy" src="https://github.com/user-attachments/assets/43ac7d8a-a2e2-4948-a579-0db371e3464c" />
 
 ---
 
@@ -73,7 +75,7 @@ Technically, we are creating a Windows Server that will later be promoted to a d
 
 - At the top of the screen, in the search bar, type in `virtual machine` and select virtual machines under `services`.
 
-[pic 0.4]
+<img width="514" height="400" alt="0 4 virtual machine" src="https://github.com/user-attachments/assets/070d2e0a-3577-460e-b3c0-92488fb84e41" />
 
 - Click `Create` and select `Virtual Machine` and configure the following details.
 
@@ -88,7 +90,7 @@ Technically, we are creating a Windows Server that will later be promoted to a d
  - Box 1: `Would you like to use an existing Windows Server license?`
  - Box 2: `I confirm I have an eligible Windows Server license with Software Assurance or Windows Server subscription to apply this Azure Hybrid Benefit.`
 
-[pic 0.5]
+<img width="761" height="493" alt="0 5 image and size domain" src="https://github.com/user-attachments/assets/e109dd6f-1da5-4e05-afb6-53cd71b63de0" />
 
 **Networking**
 - Virtual Network → Select the one you created earlier.
@@ -96,7 +98,7 @@ Technically, we are creating a Windows Server that will later be promoted to a d
 
 **Wait for deployment to finish.**
 
-[pic 0.6]
+<img width="1347" height="535" alt="0 6 dcvm delpoy" src="https://github.com/user-attachments/assets/591e0d8e-c6c6-4e50-afd7-2486f51ca888" />
 
 ---
 
@@ -115,7 +117,7 @@ The **Client** virtual machine is a VM that is joined to the domain managed by t
 - Create a Username and Password.
 - Licensing → Check the licensing box → `I confirm I have an eligible Windows 10/11 license with multi-tenant hosting rights.`
 
-[pic 0.7]
+<img width="760" height="492" alt="0 7 image and size client" src="https://github.com/user-attachments/assets/e1ac50c1-2328-4e2c-9038-5575903c0f06" />
 
 **Networking**
 - Virtual Network → Select the one you created earlier.
@@ -123,7 +125,7 @@ The **Client** virtual machine is a VM that is joined to the domain managed by t
 
 **Wait for deployment to finish.**
 
-[pic 0.8]
+<img width="1244" height="524" alt="0 8 cvm deploy" src="https://github.com/user-attachments/assets/c11f77e5-a411-4542-96af-0668b7617127" />
 
 ---
 
@@ -137,14 +139,16 @@ The **Client** virtual machine is a VM that is joined to the domain managed by t
 **Open the Virtual Machines services inside of Azure. Click and open your DC-1 Virtual Machine.**
 
 - Click the drop down for `Networking`.
-- Select `Network setting`s.
+- Select `Network settings`.
 - Click the `Network interface / IP configuration`.
 
-[pic 0.9]
+<img width="1439" height="506" alt="0 9 nic settings" src="https://github.com/user-attachments/assets/4f993c73-5681-4733-8e0e-72967f3adf00" />
+<br><br>
 
 - Click on `ipconfig1` → Private IP address settings, select `Static` → Click `Save`.
 
-[pic 1.0]
+<br>
+<img width="1897" height="683" alt="1 0 ipconfig static" src="https://github.com/user-attachments/assets/63609b5f-bae0-495f-97f5-0800f235eba2" />
 
 ---
 
@@ -153,7 +157,7 @@ If you are on a Mac you will need to download **Microsoft Remote Desktop** from 
 
 **First, inside of Azure get the Public IP address for your DC-1 VM.**
 
-[pic 1.1]
+<img width="1611" height="305" alt="1 1 dcvm public ip" src="https://github.com/user-attachments/assets/03810f47-a0dc-4860-85f1-3427f1678507" />
 
 **Next, open `Remote Desktop Connection` and click the drop down arrow for `Show Options` and enter:**
 - Computer → Public IP for your DC-1 VM.
@@ -161,11 +165,11 @@ If you are on a Mac you will need to download **Microsoft Remote Desktop** from 
 - Click `Connect` and you will be prompted to enter the password for the DC-1 VM that you created earlier.
 - Enter the password and click `OK`. Then click `Yes` to connect to your DC-1 VM via Remote Desktop Connection.
 
-[pic 1.2]
+<img width="860" height="478" alt="1 2 dcvm login" src="https://github.com/user-attachments/assets/80c44514-0e2a-42c3-a3da-ed3a3574a96f" />
 
 - Once logged into the Domain Controller, **Server Manager** will load up automatically.
 
-[pic 1.3]
+<img width="1910" height="741" alt="1 3 server manager" src="https://github.com/user-attachments/assets/4b25de20-a3e4-4642-811b-c8e022a6ea53" />
 
 ---
 
@@ -175,7 +179,7 @@ Normally you would not permanently disable the firewall on a domain controller o
 - Right click the start menu and select `Run` → Enter `wf.msc` to open Windows Firewall.
 - Select `Properties` on the right hand menu → Turn off the Firewall State under **Domain Profile**, **Private Profile** and **Public Profile** → Click `Apply` then `OK`.
 
-[pic 1.4]
+<img width="1443" height="768" alt="1 4 disable windows firewall" src="https://github.com/user-attachments/assets/6bb5455d-c069-44d5-8806-c9a7c918ec30" />
 
 ---
 
@@ -184,25 +188,25 @@ Normally you would not permanently disable the firewall on a domain controller o
 
 **First, minimize the Remote Desktop Connection and go back into Azure → Select your DC-1 VM and locate the Private IP Address and copy it.**
 
-[pic 1.5]
+<img width="1309" height="806" alt="1 5 dcvm private ip" src="https://github.com/user-attachments/assets/1a1a8c6a-618a-4658-8908-040e345cb31e" />
 
 **Next, open your Client Virtual Machine.**
 - Click the drop down for `Networking`.
 - Select `Network settings`.
 - Click the `Network interface / IP configuration`.
 
-[pic 1.6]
+<img width="1689" height="506" alt="1 6 client nic settings" src="https://github.com/user-attachments/assets/b09239bd-d9fe-4c30-a634-385037978769" />
 
 - On the left hand menu under `Settings` select DNS servers → Click `Custom` → Paste the DC-1 VMs Private IP Address into the box → Click `Save`.
 
-[pic 1.7]
+<img width="1296" height="565" alt="1 7 config client priv ip" src="https://github.com/user-attachments/assets/d6ea6e82-c635-4b33-b7f2-966e81ce52f3" />
 
 **To confirm the settings are activated lets reset the Client VM.**
 - Select the Client VM.
 - Check the box.
 - Click `Restart`.
 
-[pic 1.8]
+<img width="1640" height="318" alt="1 8 restart client" src="https://github.com/user-attachments/assets/9edc657b-5d5f-4cae-bed5-ee197b12be49" />
 
 ---
 
@@ -223,12 +227,12 @@ Next, open `Remote Desktop Connection` and click the drop down arrow for `Show O
 **Once logged onto your Client VM open up Windows PowerShell from the start menu.**
 - Type the command `ping` followed by the Private IP Address for you DC-1 VM. If configured correctly it should return `Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)`. If it returns `Destination host unreachable.` the two VMs may have been set up in different Virtual Networks or the DC-1's firewall is still active and blocking the ping.
 
-[pic 1.9]
+<img width="854" height="306" alt="1 9 ping" src="https://github.com/user-attachments/assets/6138fee7-5c97-44d4-8381-81722e49fe78" />
 
 **Next, lets confirm the DNS Server shows DC-1's Private IP Address.**
 - Type the command `ipconfig /all`. The DNS Servers should return the DC-1's VM Private IP Address.
 
-[pic 2.0]
+<img width="857" height="492" alt="2 0 ipconfig" src="https://github.com/user-attachments/assets/c1b86b9e-f4b0-4f98-b793-7a30e50f9314" />
 
 ---
 
