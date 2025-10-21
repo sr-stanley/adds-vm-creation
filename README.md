@@ -76,6 +76,7 @@ Technically, we are creating a Windows Server that will later be promoted to a d
 - At the top of the screen, in the search bar, type in `virtual machine` and select virtual machines under `services`.
 
 <img width="514" height="400" alt="0 4 virtual machine" src="https://github.com/user-attachments/assets/070d2e0a-3577-460e-b3c0-92488fb84e41" />
+<br><br>
 
 - Click `Create` and select `Virtual Machine` and configure the following details.
 
@@ -158,6 +159,7 @@ If you are on a Mac you will need to download **Microsoft Remote Desktop** from 
 **First, inside of Azure get the Public IP address for your DC-1 VM.**
 
 <img width="1611" height="305" alt="1 1 dcvm public ip" src="https://github.com/user-attachments/assets/03810f47-a0dc-4860-85f1-3427f1678507" />
+<br><br>
 
 **Next, open `Remote Desktop Connection` and click the drop down arrow for `Show Options` and enter:**
 - Computer → Public IP for your DC-1 VM.
@@ -166,6 +168,7 @@ If you are on a Mac you will need to download **Microsoft Remote Desktop** from 
 - Enter the password and click `OK`. Then click `Yes` to connect to your DC-1 VM via Remote Desktop Connection.
 
 <img width="860" height="478" alt="1 2 dcvm login" src="https://github.com/user-attachments/assets/80c44514-0e2a-42c3-a3da-ed3a3574a96f" />
+<br><br>
 
 - Once logged into the Domain Controller, **Server Manager** will load up automatically.
 
@@ -189,6 +192,7 @@ Normally you would not permanently disable the firewall on a domain controller o
 **First, minimize the Remote Desktop Connection and go back into Azure → Select your DC-1 VM and locate the Private IP Address and copy it.**
 
 <img width="1309" height="806" alt="1 5 dcvm private ip" src="https://github.com/user-attachments/assets/1a1a8c6a-618a-4658-8908-040e345cb31e" />
+<br><br>
 
 **Next, open your Client Virtual Machine.**
 - Click the drop down for `Networking`.
@@ -196,10 +200,12 @@ Normally you would not permanently disable the firewall on a domain controller o
 - Click the `Network interface / IP configuration`.
 
 <img width="1689" height="506" alt="1 6 client nic settings" src="https://github.com/user-attachments/assets/b09239bd-d9fe-4c30-a634-385037978769" />
+<br><br>
 
 - On the left hand menu under `Settings` select DNS servers → Click `Custom` → Paste the DC-1 VMs Private IP Address into the box → Click `Save`.
 
 <img width="1296" height="565" alt="1 7 config client priv ip" src="https://github.com/user-attachments/assets/d6ea6e82-c635-4b33-b7f2-966e81ce52f3" />
+<br><br>
 
 **To confirm the settings are activated lets reset the Client VM.**
 - Select the Client VM.
@@ -228,6 +234,7 @@ Next, open `Remote Desktop Connection` and click the drop down arrow for `Show O
 - Type the command `ping` followed by the Private IP Address for you DC-1 VM. If configured correctly it should return `Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)`. If it returns `Destination host unreachable.` the two VMs may have been set up in different Virtual Networks or the DC-1's firewall is still active and blocking the ping.
 
 <img width="854" height="306" alt="1 9 ping" src="https://github.com/user-attachments/assets/6138fee7-5c97-44d4-8381-81722e49fe78" />
+<br><br>
 
 **Next, lets confirm the DNS Server shows DC-1's Private IP Address.**
 - Type the command `ipconfig /all`. The DNS Servers should return the DC-1's VM Private IP Address.
