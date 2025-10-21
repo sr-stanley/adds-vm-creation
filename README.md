@@ -134,7 +134,7 @@ The **Client** virtual machine is a VM that is joined to the domain managed by t
 
 **Important for DNS Dependency**
 > Before joining any client VMs to the domain, ensure the Domain Controller’s private IP address is set to **Static**.  
-> If the Domain Controllers IP changes, client DNS resolution will fail and domain authentication will break.  
+> If the Domain Controller's IP changes, client DNS resolution will fail and domain authentication will break.  
 > Setting the DC-1 private IP to static ensures reliable communication and name resolution across the lab.
 
 **Open the Virtual Machines services inside of Azure. Click and open your DC-1 Virtual Machine.**
@@ -216,7 +216,7 @@ Inside **Windows Defender Firewall with Advanced Security** select `Inbound Rule
 <img width="1296" height="565" alt="1 7 config client priv ip" src="https://github.com/user-attachments/assets/d6ea6e82-c635-4b33-b7f2-966e81ce52f3" />
 <br><br>
 
-**To confirm the settings are activated lets reset the Client VM.**
+**To confirm the settings are activated let's reset the Client VM.**
 - Select the Client VM.
 - Check the box.
 - Click `Restart`.
@@ -240,12 +240,12 @@ Next, open `Remote Desktop Connection` and click the drop down arrow for `Show O
 *If this is your first time logging into your Client VM you will need to click through the startup configurations*
 
 **Once logged onto your Client VM open up Windows PowerShell from the start menu.**
-- Type the command `ping` followed by the Private IP Address for you DC-1 VM. If configured correctly it should return `Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)`. If it returns `Destination host unreachable.` the two VMs may have been set up in different Virtual Networks or the DC-1's firewall is still active and blocking the ping.
+- Type the command `ping` followed by the Private IP Address for your DC-1 VM. If configured correctly it should return `Packets: Sent = 4, Received = 4, Lost = 0 (0% loss)`. If it returns `Destination host unreachable.` the two VMs may have been set up in different Virtual Networks or the DC-1's firewall is still active and blocking the ping.
 
 <img width="854" height="306" alt="1 9 ping" src="https://github.com/user-attachments/assets/6138fee7-5c97-44d4-8381-81722e49fe78" />
 <br><br>
 
-**Next, lets confirm the DNS Server shows DC-1's Private IP Address.**
+**Next, let's confirm the DNS Server shows DC-1's Private IP Address.**
 - Type the command `ipconfig /all`. The DNS Servers should return the DC-1's VM Private IP Address.
 
 <img width="857" height="492" alt="2 0 ipconfig" src="https://github.com/user-attachments/assets/c1b86b9e-f4b0-4f98-b793-7a30e50f9314" />
