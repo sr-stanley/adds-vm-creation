@@ -4,7 +4,7 @@
 
 <h1>Creating and configuring a Domain Controller VM and Client VM within Azure VMs</h1>
 
-This tutorial outlines the creation of a **Domain Controller Virtual Machine** and **Client Virtual Machine** within **Azure**. After creation, we will configure DNS settings so that both VMs can communicate over the network.<br />
+This tutorial outlines the creation of a **Domain Controller Virtual Machine** and **Client Virtual Machine** within **Azure**. After creation, we will configure DNS settings so that both VMs can communicate over the network. The end goal of this tutorial will be to install **Active Directory** and simulate workflows inside of Active Directory.<br />
 
 <h2>Environments and Technologies Used</h2>
 
@@ -18,7 +18,7 @@ This tutorial outlines the creation of a **Domain Controller Virtual Machine** a
 - Windows Server 2022
 - Windows 10 (22H2)
 
-<h2>Pre-requisite</h2>
+<h2>Prerequisite</h2>
 
 Open and log in to Azure: [https://azure.microsoft.com/](https://azure.microsoft.com/)
 
