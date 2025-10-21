@@ -179,10 +179,19 @@ If you are on a Mac you will need to download **Microsoft Remote Desktop** from 
 ### Step 7 - Disable Windows Firewall Inside the Domain Controller VM
 Normally you would not permanently disable the firewall on a domain controller or other servers in a real-life production environment. In this mock scenario, the firewall is disabled temporarily to make communication and troubleshooting easier while setting up Active Directory and DNS. This avoids issues where firewall rules might block required traffic between the domain controller and client machine. In real-world settings, you would configure the firewall to allow only necessary ports and services, not disable it completely.
 
-- Right click the start menu and select `Run` → Enter `wf.msc` to open Windows Firewall.
+- Right click the start menu and select `Run` → Enter `wf.msc` to open Windows Defender Firewall with Advanced Security.
 - Select `Properties` on the right hand menu → Turn off the Firewall State under **Domain Profile**, **Private Profile** and **Public Profile** → Click `Apply` then `OK`.
 
 <img width="1443" height="768" alt="1 4 disable windows firewall" src="https://github.com/user-attachments/assets/6bb5455d-c069-44d5-8806-c9a7c918ec30" />
+<br><br>
+
+💡If you don't want to disable Windows Firewall completely, another option is to enable ICMP (Internet Control Message Protocol) to test the network connection.
+
+**To enable ICMP:**
+
+Inside **Windows Defender Firewall with Advanced Security** select `Inbound Rules` → Click `New Rule...` → Click `Predefined` and use the drop down to select `File and Printer Sharing` → Click `Next` → Check the box for `File and Printer Sharing (Echo Request -- ICMPv4-In)` → Click` Next` → Click `Allow the connection` → Click `Finish`.
+
+<img width="1755" height="774" alt="4 echo" src="https://github.com/user-attachments/assets/af9e9a94-2eab-4e23-8d50-dc933394a179" />
 
 ---
 
@@ -243,4 +252,8 @@ Next, open `Remote Desktop Connection` and click the drop down arrow for `Show O
 
 ---
 
-## This concludes Part 1 - configurations and creation of the Domain Controller Virtual Machine and the Client Virtual Machine. In the next part we will install and configure Active Directory in our Domain Controller, add the Client VM to the domain and create and configure users inside of Active Directory for our mock scenario environment.
+## This concludes Part 1 - creation and configuration of the Domain Controller Virtual Machine and the Client Virtual Machine. <br>
+**In the next part we will:**
+- Install and configure Active Directory in our Domain Controller.
+- Add the Client VM to the domain.
+- Create and configure users inside of Active Directory for our mock scenario environment.
