@@ -252,7 +252,7 @@ Next, open `Remote Desktop Connection` and click the drop down arrow for `Show O
 
 ---
 
-## This concludes Part 1 - creation and configuration of the Domain Controller Virtual Machine and the Client Virtual Machine. <br>
+## This concludes Part 1 - Creation and Configuration of the Domain Controller Virtual Machine and the Client Virtual Machine. <br>
 **In the next part we will:**
 - Install and configure Active Directory in our Domain Controller.
 - Add the Client VM to the domain.
