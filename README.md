@@ -6,7 +6,7 @@
 
 This tutorial outlines the creation of a **Domain Controller Virtual Machine** and **Client Virtual Machine** within **Azure**. After creation, we will configure DNS settings so that both VMs can communicate over the network. The end goal of this tutorial will be to install **Active Directory** and simulate workflows inside of Active Directory.<br />
 
-<h2>Environments and Technologies Used</h2>
+<h2>Environments, Technologies and Tools Used</h2>
 
 - Microsoft Azure (Virtual Machines/Compute)
 - Remote Desktop
